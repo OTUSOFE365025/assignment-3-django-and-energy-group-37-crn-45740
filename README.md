@@ -38,9 +38,9 @@ Create a folder for your project on your local machine
 ```
 mkdir myproject; cd myproject
 ```
-Create a virtual environment and install django
+Create a virtual environment and install django and PyQt5
 ```
-python -m venv venv; source venv/bin/activate; pip install django
+python -m venv venv; source venv/bin/activate; pip install django; pip install pyqt5
 ```
 Download this project template from GitHub
 ```
