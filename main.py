@@ -1,5 +1,5 @@
 ############################################################################
-## Django ORM Standalone Python Template
+# Django ORM Standalone Python Template
 ############################################################################
 """ Here we'll import the parts of Django we need. It's recommended to leave
 these settings as is, and skip to START OF APPLICATION section below """
@@ -17,16 +17,27 @@ import django
 django.setup()
 
 # Import your models for use in your script
-from db.models import *
+from db.models import Product
 
 ############################################################################
-## START OF APPLICATION
+# START OF APPLICATION
 ############################################################################
 """ Replace the code below with your own """
+if len(sys.argv) < 2:
+    print("Missing UPC to scan!")
+    sys.exit(1)
 
-# Seed a few users in the database
-User.objects.create(name='Dan')
-User.objects.create(name='Robert')
+upc_lu=sys.argv[1]
 
-for u in User.objects.all():
-    print(f'ID: {u.id} \tUsername: {u.name}')
+Product.objects.all().delete()
+Product.objects.create(name="ProductA", price=49.99, upc="200001149995")
+Product.objects.create(name="ProductB", price=11.25, upc="200002111254")
+Product.objects.create(name="ProductC", price=239.21, upc="200003000454")
+
+# Attempt to find provided item via UPC
+try:
+    p = Product.objects.get(upc=upc_lu)
+    print(f"UPC: {p.upc}, Name: {p.name}, Price: {p.price}")
+except Product.DoesNotExist:
+    print(f"Product with UPC '{upc_lu}' not found!")
+    sys.exit()
