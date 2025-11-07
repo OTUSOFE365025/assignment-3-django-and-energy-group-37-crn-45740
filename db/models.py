@@ -7,10 +7,8 @@ except Exception:
     sys.exit()
 
 
-# Sample User model
-class User(models.Model):
-    name = models.CharField(max_length=50, default="Dan")
-
-    def __str__(self):
-        return self.name
-
+class Product(models.Model):
+    name = models.CharField(max_length=50)
+    price = models.FloatField()
+    # UPC-A standard used in North America
+    upc = models.CharField(max_length=12)
